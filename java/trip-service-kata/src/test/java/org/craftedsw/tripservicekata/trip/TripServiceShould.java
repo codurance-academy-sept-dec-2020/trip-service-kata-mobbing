@@ -28,26 +28,26 @@ public class TripServiceShould {
   }
 
   @Test
-  void tell_a_user_is_not_logged_in() {
+  void thrown_an_exception_when_user_is_not_logged_in() {
     loggedInUser = GUEST_USER;
     assertThrows(UserNotLoggedInException.class, () -> tripService.getTripsByUser(ANOTHER_USER));
   }
 
   @Test
-  void tell_a_logged_user_has_no_trips() {
+  void return_no_trips_when_user_are_not_friends() {
     loggedInUser = REGISTERED_USER;
     User aUser = aUser()
-        .withFriends(loggedInUser)
+        .withFriends(ANOTHER_USER)
         .build();
 
     assertThat(tripService.getTripsByUser(aUser), empty());
   }
 
   @Test
-  void tell_a_logged_user_has_trips() {
+  void return_trips_when_user_are_friends() {
     loggedInUser = REGISTERED_USER;
     User aUser = aUser()
-        .withFriends(loggedInUser)
+        .withFriends(ANOTHER_USER, loggedInUser)
         .withTrips(TRIP_TO_ROME)
         .build();
 
