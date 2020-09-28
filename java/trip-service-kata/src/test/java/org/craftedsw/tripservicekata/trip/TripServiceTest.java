@@ -10,7 +10,7 @@ public class TripServiceTest {
     @Test
     void user_is_not_logged_should_throws_an_exception() {
         TripService tripService = new FakeTripService();
-                User user = new User();
+        User user = new User();
         assertThrows(UserNotLoggedInException.class, () -> tripService.getTripsByUser(user));
     }
 
