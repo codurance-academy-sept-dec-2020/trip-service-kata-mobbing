@@ -1,6 +1,7 @@
 package org.craftedsw.tripservicekata.trip;
 
 import org.craftedsw.tripservicekata.exception.UserNotLoggedInException;
+import org.craftedsw.tripservicekata.trip.helpers.NotLoggedUserTripService;
 import org.craftedsw.tripservicekata.user.User;
 import org.junit.jupiter.api.Test;
 
@@ -25,19 +26,5 @@ public class TripServiceShould {
     assertThat(tripService.getTripsByUser(user), empty());
   }
 
-  class NotLoggedUserTripService extends TripService {
-
-    public User getLoggedUser() {
-      return null;
-    }
-  }
-
-  class LoggedUserTripService extends TripService {
-
-    @Override
-    protected User getLoggedUser() {
-      return new User();
-    }
-  }
 }
 
