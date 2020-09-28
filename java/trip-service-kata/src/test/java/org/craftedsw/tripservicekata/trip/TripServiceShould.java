@@ -62,7 +62,7 @@ public class TripServiceShould {
     }
 
     @Override
-    protected User getLoggedUser() {
+    protected User getUser() {
       return loggedInUser;
     }
   }
