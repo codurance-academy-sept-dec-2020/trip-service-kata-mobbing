@@ -1,5 +1,6 @@
 package org.craftedsw.tripservicekata.trip;
 
+import static org.craftedsw.tripservicekata.trip.UserBuilder.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.hasSize;
@@ -35,7 +36,7 @@ public class TripServiceShould {
   @Test
   void tell_a_logged_user_has_no_trips() {
     loggedInUser = REGISTERED_USER;
-    User aUser = UserBuilder.aUser()
+    User aUser = aUser()
         .withFriends(loggedInUser)
         .build();
 
@@ -45,7 +46,7 @@ public class TripServiceShould {
   @Test
   void tell_a_logged_user_has_trips() {
     loggedInUser = REGISTERED_USER;
-    User aUser = UserBuilder.aUser()
+    User aUser = aUser()
         .withFriends(loggedInUser)
         .withTrips(TRIP_TO_ROME)
         .build();
@@ -66,40 +67,5 @@ public class TripServiceShould {
     }
   }
 
-  private static class UserBuilder {
-
-    private User[] users;
-    private Trip[] trips;
-
-    public UserBuilder() {
-      this.users = new User[]{};
-      this.trips = new Trip[]{};
-    }
-
-    public static UserBuilder aUser() {
-      return new UserBuilder();
-    }
-
-    public UserBuilder withFriends(User... users) {
-      this.users = users;
-      return this;
-    }
-
-    public UserBuilder withTrips(Trip... trips) {
-      this.trips = trips;
-      return this;
-    }
-
-    public User build() {
-      User aUser = new User();
-      for (User user : users) {
-        aUser.addFriend(user);
-      }
-      for (Trip trip : trips) {
-        aUser.addTrip(trip);
-      }
-      return aUser;
-    }
-  }
 }
 
