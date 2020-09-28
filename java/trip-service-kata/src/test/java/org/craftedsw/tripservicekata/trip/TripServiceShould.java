@@ -28,13 +28,13 @@ public class TripServiceShould {
   }
 
   @Test
-  void thrown_an_exception_when_user_is_not_logged_in() {
+  void throw_an_exception_when_user_is_not_logged_in() {
     loggedInUser = GUEST_USER;
     assertThrows(UserNotLoggedInException.class, () -> tripService.getTripsByUser(ANOTHER_USER));
   }
 
   @Test
-  void return_no_trips_when_user_are_not_friends() {
+  void return_no_trips_when_users_are_not_friends() {
     loggedInUser = REGISTERED_USER;
     User aUser = aUser()
         .withFriends(ANOTHER_USER)
@@ -44,7 +44,7 @@ public class TripServiceShould {
   }
 
   @Test
-  void return_trips_when_user_are_friends() {
+  void return_trips_when_users_are_friends() {
     loggedInUser = REGISTERED_USER;
     User aUser = aUser()
         .withFriends(ANOTHER_USER, loggedInUser)
